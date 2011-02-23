@@ -1,0 +1,41 @@
+A collection of bugfixes and patches for Dexter's 1.2 ROM
+
+Usage:
+------
+
+1) Create a patch
+
+    ./make-patch.sh
+
+   This will create a date and timestamped patch-YYYYMMDD-HHMMSS.zip
+   that can be copied to the OpenRecovery/updates folder on the
+   sdcard. Renaming the generated file is no problem
+   (i.e. mypatch.zip).
+
+2) Copy patch to OpenRecovery/updates on the sdcard
+
+3) Boot into OpenRecovery
+
+4) Use "Apply Update" menu option and select your update
+
+
+Notes:
+------
+
+ * The contents of ramdisk/ becomes /system/ramdisk.tar which is
+   becomes the root filesystem after 2ndinit.
+
+ * The generated patch uses the unsigned, nobinary OpenRecovery update
+   method because I don't know any better.
+
+ * Because git does not currently track empty directories, .gitignore
+   files are present inside directories such as ramdisk/emmc. When
+   creating patch/system/ramdisk.tar from ramdisk/, make-patch.sh
+   excludes all .gitignore files.
+
+ * Be sure to modify patch/META-INF/com/google/android/updater-script
+   to set file ownership and permissions.
+
+ * The ./make-patch.sh build script has been tested on Debian and
+   Ubuntu but doesn't do anything wierd. It basically just needs bash,
+   tar, and zip.
