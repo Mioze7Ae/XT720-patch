@@ -9,8 +9,8 @@ Usage:
 
    This will create a date and timestamped patch-YYYYMMDD-HHMMSS.zip
    that can be copied to the OpenRecovery/updates folder on the
-   sdcard. Renaming the generated file is no problem
-   (i.e. mypatch.zip).
+   sdcard. Renaming the zip file after it's been generate is not a
+   problem (i.e. mypatch.zip). Pick something memorable.
 
 2) Copy patch to OpenRecovery/updates on the sdcard
 
@@ -22,8 +22,10 @@ Usage:
 Notes:
 ------
 
- * The contents of ramdisk/ becomes /system/ramdisk.tar which is
-   becomes the root filesystem after 2ndinit.
+ * Not compatible with 1.2a.
+
+ * The contents of ramdisk/ becomes /system/ramdisk.tar which becomes
+   the root filesystem after 2ndinit.
 
  * The generated patch uses the unsigned, nobinary OpenRecovery update
    method because I don't know any better.
@@ -39,3 +41,10 @@ Notes:
  * The ./make-patch.sh build script has been tested on Debian and
    Ubuntu but doesn't do anything wierd. It basically just needs bash,
    tar, and zip.
+
+ * Thanks to Dexter and all the other wonderful, friendly contributers
+   on XDA.
+
+ * Development follows discussions and feedback on
+   http://forum.xda-developers.com/showthread.php?t=939644
+
