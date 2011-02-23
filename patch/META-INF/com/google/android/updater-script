@@ -1,6 +1,7 @@
 ui_print("Unpacking libOMX update for stock221v12...");
 mount("MTD", "system", "/system");
 package_extract_dir("system", "/system");
+set_perm(0, 0, 0644, "/system/ramdisk.tar");
 set_perm(0, 0, 0644, "/system/lib/libOMX.TI.Video.encoder.so");
 set_perm(0, 0, 0644, "/system/lib/libOMX.TI.JPEG.Encoder.so");
 set_perm(0, 0, 0644, "/system/lib/libOMX.TI.WBAMR.encode.so");

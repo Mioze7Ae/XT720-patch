@@ -1,12 +1,9 @@
 #!/bin/bash
 
-# rm -f ramdisk.tar
-# cd ramdisk
-# tar czf ../ramdisk.tar --owner=0 --group=0 *
-# cd ..
-# tar tvzf ramdisk.tar
-
-# cp ramdisk.tar patch/system/ramdisk.tar
+cd ramdisk
+rm ../patch/system/ramdisk.tar
+tar czf ../patch/system/ramdisk.tar --exclude=.gitignore --owner=0 --group=0 *
+cd ..
 
 cd patch
 zip -rn .zip:.tar ../patch-$(date +%Y%m%d-%H%M%S) *
