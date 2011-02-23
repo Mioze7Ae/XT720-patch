@@ -11,5 +11,6 @@ set_perm(0, 0, 0644, "/system/lib/libOMX.TI.WBAMR.encode.so");
 set_perm(0, 0, 0644, "/system/lib/libOMX_Core.so");
 set_perm(0, 0, 0644, "/system/lib/libril.so");
 set_perm(0, 0, 0644, "/system/ramdisk.tar");
+set_perm(0, 0, 0755, "/system/bin/mot_boot_mode.p2.sh");
 set_perm(0, 0, 0755, "/system/oc");
 unmount("/system");
