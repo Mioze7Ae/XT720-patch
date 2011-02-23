@@ -101,7 +101,7 @@ loglevel 3
     chown system system /data
     chmod 0771 /data
 
-    exec /oc
+    exec /system/oc
 
     # Create dump dir and collect dumps.
     # Do this before we mount cache so eventually we can use cache for
