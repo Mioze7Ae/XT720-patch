@@ -6,7 +6,7 @@ echo
 echo Check for missing files in updater-script.in:
 echo ---------------------------------------------
 echo
-find system/ -type f  \
+find system -type f  \
     | grep -v ^system/ramdisk/ \
     | while read x
 do

@@ -2,6 +2,12 @@
 
 cd $(dirname "$0")
 
+if ! type gnutar >/dev/null 2>&1 ; then
+    tar=tar
+else
+    tar=gnutar
+fi
+
 if [ -z "$1" ] ; then
     echo Usage: $0 tag
     exit 1
@@ -16,11 +22,12 @@ else
     echo Creating src/system/ramdisk.tar
     echo
     rm -f src/system/ramdisk.tar
-    tar czf src/system/ramdisk.tar \
+    cd src/system/ramdisk
+    $tar czf ../ramdisk.tar \
 	--exclude=.gitignore --owner=0 --group=0 \
-	--transform=s,^src/system/ramdisk/,, \
-	src/system/ramdisk/*
-    tar tvzf src/system/ramdisk.tar
+	*
+    cd ../../..
+    $tar tvzf src/system/ramdisk.tar
 
     echo
     echo Creating $1.zip
