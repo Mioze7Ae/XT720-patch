@@ -1,0 +1,4 @@
+#!/system/xbin/busybox sh
+
+adr=`grep nr_running /proc/kallsyms | cut -f1 -d" "`
+insmod /system/lib/modules/cpufreq_interactive.ko nr_running_addr=0x$adr

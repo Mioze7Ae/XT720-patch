@@ -101,7 +101,7 @@ loglevel 3
     chown system system /data
     chmod 0771 /data
 
-    exec /system/oc
+    exec /system/xbin/busybox run-parts /system/etc/init.c
 
     # Create dump dir and collect dumps.
     # Do this before we mount cache so eventually we can use cache for
