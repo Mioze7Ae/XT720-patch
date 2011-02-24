@@ -13,7 +13,6 @@ insmod /system/lib/modules/overclock_milestone_21.ko omap2_clk_init_cpufreq_tabl
 # device-specific folder on the sdcard...
 mount -oro /dev/block/mmcblk0p1 /sdcard
 if [[ -e /sdcard/oc-settings ]] ; then
-    echo found oc-settings
     dos2unix < /sdcard/oc-settings > /data/oc-settings
     chmod 755 /data/oc-settings
     /data/oc-settings

@@ -3,13 +3,25 @@
 # enable sd-ext
 if [[ -e /dev/block/mmcblk0p2 ]] ; then
     insmod /system/lib/modules/jbd.ko
-    # insmod /system/lib/modules/jbd2.ko
-    # insmod /system/lib/modules/crc16.ko
-    # insmod /system/lib/modules/ext4.ko
-    insmod /system/lib/modules/ext3.ko
+    insmod /system/lib/modules/jbd2.ko
+    insmod /system/lib/modules/crc16.ko
     insmod /system/lib/modules/ext2.ko
+    insmod /system/lib/modules/ext3.ko
+    insmod /system/lib/modules/ext4.ko
 
-    mount /dev/block/mmcblk0p2 /sd-ext
+    # Read desired filesystem type from /sdcard/sd-ext-settings
+    fstype=""
+    mount -oro /dev/block/mmcblk0p1 /sdcard
+    if [[ -e /sdcard/sd-ext-settings ]] ; then
+	for x in ext2 ext3 ext4 ; do
+	    if grep ^$x\$ /sdcard/sd-ext-settings >/dev/null ; then
+		fstype="-t $x"
+	    fi
+	done
+    fi
+    umount /sdcard
+    
+    mount $fstype /dev/block/mmcblk0p2 /sd-ext
     if [[ $? -eq 0 ]] ; then
 	# Mount succeeded
         chown 1000:1000 /sd-ext
@@ -37,5 +49,15 @@ if [[ -e /dev/block/mmcblk0p2 ]] ; then
                 ln -s /sd-ext/$x /data/$x
 	    fi
         done
+
+	# Link2SD support
+	if [[ -d /sd-ext/link2sd && ! -d /sd-ext/app ]] ; then
+            chown 1000:1000 /sd-ext/link2sd
+            chmod 0771 /sd-ext/link2sd
+	    mkdir /data/sdext2
+	    chown 1000:1000 /data/sdext2
+            chmod 0771 /data/sdext2
+	    mount --bind /sd-ext/link2sd/ /data/sdext2
+	fi
     fi
 fi
