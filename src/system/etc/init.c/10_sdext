@@ -1,0 +1,41 @@
+#!/system/xbin/busybox sh
+
+# enable sd-ext
+if [[ -e /dev/block/mmcblk0p2 ]] ; then
+    insmod /system/lib/modules/jbd.ko
+    # insmod /system/lib/modules/jbd2.ko
+    # insmod /system/lib/modules/crc16.ko
+    # insmod /system/lib/modules/ext4.ko
+    insmod /system/lib/modules/ext3.ko
+    insmod /system/lib/modules/ext2.ko
+
+    mount /dev/block/mmcblk0p2 /sd-ext
+    if [[ $? -eq 0 ]] ; then
+	# Mount succeeded
+        chown 1000:1000 /sd-ext
+        chmod 0771 /sd-ext
+
+	# Migrate selected directories from /data to /sd-ext and
+	# replace /data with symbolic links. By default, nothing is
+	# moved. To cause a directory to migrate you must first create
+	# the directory on the ext2 partition.
+        for x in app app-private dalvik-cache ; do
+            # Remove stale symbolic links. It's important to remove
+            # invalid links because otherwise you'll get a boot
+            # loop. When init.rc continues after all the init.c
+            # scripts have run, it will recreate any missing
+            # directories in /data/ if we don't create links here.
+            [[ -e /data/$x ]] || rm /data/$x
+
+            # Move and/or link /data/$x to /sd-ext if /sd-ext/$x
+            # exists as a directory
+            if [[ -d /sd-ext/$x ]] ; then
+                chown 1000:1000 /sd-ext/$x
+                chmod 0771 /sd-ext/$x
+		[[ -d /data/$x ]] && cp -a /data/$x/* /sd-ext/$x/
+                [[ -d /data/$x ]] && rm -R /data/$x
+                ln -s /sd-ext/$x /data/$x
+	    fi
+        done
+    fi
+fi

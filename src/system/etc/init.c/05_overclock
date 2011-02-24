@@ -5,14 +5,14 @@ adr=`grep omap2_clk_init_cpufreq_table /proc/kallsyms | cut -f1 -d" "`
 insmod /system/lib/modules/overclock_milestone_21.ko omap2_clk_init_cpufreq_table_addr=0x$adr
 
 ## Exit if module not loaded
-[ -d /proc/overclock ] || exit
+[[ -d /proc/overclock ]] || exit
 
 ## Load oc-settings from sdcard
 # Beware! There is no way to test the oc-settings are safe for this
 # device... Maybe it should be to oc-settings-xt720 or put in a
 # device-specific folder on the sdcard...
 mount -oro /dev/block/mmcblk0p1 /sdcard
-if [ -e /sdcard/oc-settings ] ; then
+if [[ -e /sdcard/oc-settings ]] ; then
     echo found oc-settings
     dos2unix < /sdcard/oc-settings > /data/oc-settings
     chmod 755 /data/oc-settings
@@ -47,14 +47,14 @@ getMilestoneOverclockPref () {
 ## Make sure module is loaded and that autoload is requested
 # Beware! It's possible the user had autoload set/saved on the sdcard
 # from a previous ROM but has no preferences! So check for both.
-if [ -f $pathautoload -a -f $pathprefs ] ; then
+if [[ -f $pathautoload && -f $pathprefs ]] ; then
     # Extract max_rate, max_vsel values from Milestone Overclock
     # preferences
     autoloadRate=$(getMilestoneOverclockPref autoloadRate)
     autoloadVsel=$(getMilestoneOverclockPref autoloadVsel)
 
     # Ensure both values were successfully read
-    if [ ! -z "$autoloadRate" -a ! -z "$autoloadVsel" ] ; then
+    if [[ ! -z "$autoloadRate" && ! -z "$autoloadVsel" ]] ; then
 	echo $autoloadRate > /proc/overclock/max_rate
 	echo $autoloadVsel > /proc/overclock/max_vsel
     fi
