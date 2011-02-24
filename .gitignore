@@ -1,2 +1,3 @@
-patch/system/ramdisk.tar
+src/system/ramdisk.tar
+src/META-INF/com/google/android/updater-script
 *~

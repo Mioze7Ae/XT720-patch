@@ -1,4 +1,4 @@
-ui_print("Unpacking stock221v12 update...");
+ui_print("Unpacking XxXxXxXxXxXxXxXx update...");
 mount("MTD", "system", "/system");
 package_extract_dir("system", "/system");
 set_perm(0, 0, 0644, "/system/app/MediaGallery.apk");
