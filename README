@@ -1,5 +1,23 @@
 A collection of bugfixes and patches for Dexter's 1.2 ROM
 
+
+ChangeLog:
+----------
+
+2011/02/24 stock221v12-bugfix-1:
+
+ * xavwanted's libOMX and MediaGallery.apk which seems to fix HD
+   recording and playback
+
+ * Riley600's interactive governor fix
+
+ * Dexter's 1.2b callwaiting fix
+
+ * kousik's mount-o typo fix
+
+ * move /oc to /system/oc
+
+
 Usage:
 ------
 
