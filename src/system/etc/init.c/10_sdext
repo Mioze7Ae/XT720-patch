@@ -5,8 +5,8 @@ if [[ -e /dev/block/mmcblk0p2 ]] ; then
     insmod /system/lib/modules/jbd.ko
     insmod /system/lib/modules/jbd2.ko
     insmod /system/lib/modules/crc16.ko
-    insmod /system/lib/modules/ext2.ko
     insmod /system/lib/modules/ext3.ko
+    insmod /system/lib/modules/ext2.ko
     insmod /system/lib/modules/ext4.ko
 
     # Read desired filesystem type from /sdcard/sd-ext-settings
