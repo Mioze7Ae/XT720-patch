@@ -2,26 +2,29 @@
 
 # enable sd-ext
 if [[ -e /dev/block/mmcblk0p2 ]] ; then
+    #
+    #  Note well: What can each module mount?
+    #             (kousik's trick)
+    #
+    #                  Filesystem
+    #     Module  | ext2  ext3  ext4
+    #    ---------+-------------------
+    #     ext3.ko | no    YES   no?
+    #     ext2.ko | YES   yes   no?
+    #     ext4.ko | yes   yes   NO?!?
+    #
     insmod /system/lib/modules/jbd.ko
-    insmod /system/lib/modules/jbd2.ko
-    insmod /system/lib/modules/crc16.ko
     insmod /system/lib/modules/ext3.ko
     insmod /system/lib/modules/ext2.ko
-    insmod /system/lib/modules/ext4.ko
+    #insmod /system/lib/modules/jbd2.ko
+    #insmod /system/lib/modules/crc16.ko
+    #insmod /system/lib/modules/ext4.ko
 
-    # Read desired filesystem type from /sdcard/sd-ext-settings
-    fstype=""
-    mount -oro /dev/block/mmcblk0p1 /sdcard
-    if [[ -e /sdcard/sd-ext-settings ]] ; then
-	for x in ext2 ext3 ext4 ; do
-	    if grep ^$x /sdcard/sd-ext-settings >/dev/null ; then
-		fstype="-t $x"
-	    fi
-	done
-    fi
-    umount /sdcard
-    
-    mount $fstype /dev/block/mmcblk0p2 /sd-ext
+    # Do nothing if fsck fails (i.e. not ext2/3, errors)
+    e2fsck -y /dev/block/mmcblk0p2
+    [[ $? -eq 0 ]] || exit
+
+    mount -o noatime,nodiratime /dev/block/mmcblk0p2 /sd-ext
     if [[ $? -eq 0 ]] ; then
 	# Mount succeeded
         chown 1000:1000 /sd-ext
