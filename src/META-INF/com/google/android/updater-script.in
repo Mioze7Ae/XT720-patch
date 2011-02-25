@@ -6,4 +6,5 @@ set_perm(0, 0, 0755, "/system/etc/init.c");
 set_perm(0, 0, 0755, "/system/etc/init.c/00_interactive");
 set_perm(0, 0, 0755, "/system/etc/init.c/05_overclock");
 set_perm(0, 0, 0755, "/system/etc/init.c/10_sdext");
+delete("/system/oc");
 unmount("/system");
