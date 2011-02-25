@@ -48,8 +48,6 @@ ChangeLog:
    Note: Link2SD now has an option to move corresponding dalvik-cache
          with apps to /sd-ext. DON'T mix this with moving the entire
          dalvik-cache to /sd-ext/dalvik-cache. Pick one or the other.
-
-
       
 
 Usage:

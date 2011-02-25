@@ -22,7 +22,7 @@ if [[ -e /dev/block/mmcblk0p2 ]] ; then
 
     # Do nothing if fsck fails (i.e. not ext2/3, errors)
     e2fsck -y /dev/block/mmcblk0p2
-    [[ $? -eq 0 ]] || exit
+    [[ $? -ge 2 ]] || exit
 
     mount -o noatime,nodiratime /dev/block/mmcblk0p2 /sd-ext
     if [[ $? -eq 0 ]] ; then
