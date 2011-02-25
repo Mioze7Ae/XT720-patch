@@ -23,7 +23,7 @@ grep set_perm META-INF/com/google/android/updater-script.in \
     | while read x
 do
     printf "  %-50s   " $x
-    ls -ld .$x
+    ls -d .$x
 done
 
 echo
