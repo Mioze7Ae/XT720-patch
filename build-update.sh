@@ -33,7 +33,7 @@ else
     echo Creating $1.zip
     echo
     cd src
-    zip -rn .zip:.tar "../updates/$1" * \
+    zip -rn .zip:.tar "../updates/$1.zip" * \
 	-x system/ramdisk/\* .gitignore \
 	META-INF/com/google/android/updater-script.in
 fi

@@ -1,11 +1,13 @@
 ui_print("Unpacking XxXxXxXxXxXxXxXx update...");
 mount("MTD", "system", "/system");
 package_extract_dir("system", "/system");
+set_perm(0, 0, 0644, "/system/app/MilestoneOverclock147.apk");
+set_perm(0, 0, 0644, "/system/lib/modules/cpufreq_interactive.ko");
 set_perm(0, 0, 0644, "/system/ramdisk.tar");
+set_perm(0, 0, 0755, "/system/bin/mot_boot_mode.p2.sh");
 set_perm(0, 0, 0755, "/system/etc/init.c");
 set_perm(0, 0, 0755, "/system/etc/init.c/00_interactive");
 set_perm(0, 0, 0755, "/system/etc/init.c/05_overclock");
 set_perm(0, 0, 0755, "/system/etc/init.c/10_sdext");
 set_perm(0, 0, 0755, "/system/xbin/e2fsck");
-delete("/system/oc");
 unmount("/system");
