@@ -13,6 +13,7 @@ insmod /system/lib/modules/overclock_milestone_21.ko omap2_clk_init_cpufreq_tabl
 # device-specific folder on the sdcard...
 mount -oro /dev/block/mmcblk0p1 /sdcard
 if [[ -e /sdcard/oc-settings ]] ; then
+    log -p w loading /sdcard/oc-settings
     dos2unix < /sdcard/oc-settings > /data/oc-settings
     chmod 755 /data/oc-settings
     /data/oc-settings
@@ -56,6 +57,8 @@ if [[ -f $pathautoload && -f $pathprefs ]] ; then
     if [[ ! -z "$autoloadRate" && ! -z "$autoloadVsel" ]] ; then
 	echo $autoloadRate > /proc/overclock/max_rate
 	echo $autoloadVsel > /proc/overclock/max_vsel
+	log -p w set milestone overclock max_rate=$autoloadRate
+	log -p w set milestone overclock max_vsel=$autoloadVsel
     fi
 fi
 
