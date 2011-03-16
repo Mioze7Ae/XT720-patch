@@ -11,7 +11,7 @@ find system -type f  \
     | while read x
 do
     printf "  %-50s   " $x
-    echo $(grep $x META-INF/com/google/android/updater-script.in)
+    echo $(grep $x\" META-INF/com/google/android/updater-script.in)
 done
 
 echo
