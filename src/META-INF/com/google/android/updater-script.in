@@ -47,5 +47,6 @@ set_perm(0,0,0755,"/system/etc/init.c/05_overclock");
 set_perm(0,0,0755,"/system/etc/init.c/10_sdext");
 set_perm(0,0,0755,"/system/etc/init.c/15_memhack");
 set_perm(0,0,0755,"/system/etc/init.c/99_stalelinks");
+set_perm(0,0,0755,"/system/etc/init.d/00_minfree");
 set_perm(0,0,0755,"/system/xbin/e2fsck");
 unmount("/system");

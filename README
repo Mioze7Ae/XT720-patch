@@ -11,6 +11,11 @@ Summary:
    Note: Will use /sd-ext/dalvik-cache instead if it exists
          (see also "User control of /sd-ext" below)
 
+ * minfree memory parameters tweaked
+   Note: Parameters from AutoKiller Memory Optimizer database
+         http://andrs.w3pla.net/autokiller/list/currentType/378
+         http://andrs.w3pla.net/autokiller/list/currentType/591
+
  * Fix milestone overclock persistence
 
  * Autodetects ext2/3 (kousik)
@@ -42,6 +47,15 @@ ChangeLog:
 
 
 2011/03/16 stock221v13-bugfix-2:
+
+ * Set minfree at boot (/system/etc/init.d/00_minfree)
+   Note: Parameters from AutoKiller Memory Optimizer database
+         http://andrs.w3pla.net/autokiller/list/currentType/378
+         http://andrs.w3pla.net/autokiller/list/currentType/591
+   Note: Uses 1536,2048,4096,10240,12800,15360
+         (corresponds to 6mb,8mb,16mb,40mb,50mb,60mb)
+   Note: This corresponds to AutoKiller Memory Optimzer's "Optimum"
+         preset.
 
  * Implement memhack: move dalvik-cache from /data to /cache. This is
    also default behavior (However, dalvik-cache will be sent to

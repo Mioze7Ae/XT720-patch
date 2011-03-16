@@ -1,0 +1,8 @@
+#!/system/xbin/busybox sh
+
+# See also:
+#   http://andrs.w3pla.net/autokiller
+#   http://andrs.w3pla.net/autokiller/list/currentType/378
+#   http://andrs.w3pla.net/autokiller/list/currentType/591
+echo 0,1,2,7,14,15 > /sys/module/lowmemorykiller/parameters/adj
+echo 1536,2048,4096,10240,12800,15360 > /sys/module/lowmemorykiller/parameters/minfree
