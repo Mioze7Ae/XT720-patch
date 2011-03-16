@@ -1,8 +1,72 @@
 A collection of bugfixes and patches for Dexter's 1.3 ROM
 
 
+Summary:
+---------
+
+ * Performance and library tweaks (xavwanted)
+
+ * memhack (khalpowers) moves dalvik-cache to either /cache or /sd-ext
+   Note: Default moves dalvik-cache to /cache
+   Note: Will use /sd-ext/dalvik-cache instead if it exists
+         (see also "User control of /sd-ext" below)
+
+ * Fix milestone overclock persistence
+
+ * Autodetects ext2/3 (kousik)
+
+ * ext2/3 partition is checked and possibly repaired on boot
+
+ * Disable automatic apps2ext. Native Froyo App2SD is affected.
+   Note: See also "User control of /sd-ext" below
+   Note: apps2ext used to be called app2sd before native Froyo App2SD
+         (apps2fat) existed. Confusing!
+
+ * Add support for Link2SD (see user control of /sd-ext below)
+   Note: See also "User control of /sd-ext" below
+
+ * User control of /sd-ext through manual creation of directories
+      /sd-ext/app (move /data/app to /sd-ext [apps2ext])
+      /sd-ext/dalvik-cache (move /data/dalvik-cache to /sd-ext)
+      /sd-ext/app-private (move /data/app-private to /sd-ext)
+      /sd-ext/link2sd (enable Link2SD 1.5.1 support)
+   Note: apps2ext has priority over link2sd and overrides!
+         It doesn't make sense to use both!
+
+ * Replaces /system/oc with modular scripts in /system/etc/init.c
+
+
+
 ChangeLog:
 ----------
+
+
+2011/03/16 stock221v13-bugfix-2:
+
+ * Implement memhack: move dalvik-cache from /data to /cache. This is
+   also default behavior (However, dalvik-cache will be sent to
+   /sd-ext/dalvik-cache instead if it exists).
+
+ * Apply xavwanted's egl.cfg performance tweak.
+
+ * Apply xavwanted's newer updated media libraries.
+
+ * Fix typo'd filenames:
+      /system/bin/fmradioserver1 
+         -> /system/bin/fmradioserver
+      /system/usr/keylayout/qwerty.kl1
+         -> /system/usr/keylayout/qwerty.kl
+      /system/usr/keychars/qwerty.kcm.bin1
+         -> /system/usr/keychars/qwerty.kcm.bin
+
+ * Delay calling /system/etc/init.c/ until just after both /data and
+   /cache are available (for memhack)
+
+ * Add some logging to 05_overclock and 10_sdext
+
+ * 10_sdext uses "e2fsck -p" instead of "e2fsck -y"
+
+
 
 2011/02/24 stock221v13-bugfix-1:
 
@@ -50,6 +114,7 @@ ChangeLog:
          dalvik-cache to /sd-ext/dalvik-cache. Pick one or the other.
       
 
+
 Usage:
 ------
 
@@ -65,6 +130,7 @@ Usage:
 3) Boot into OpenRecovery.
 
 4) Use "Apply Update" menu option and select your update.
+
 
 
 Notes:
