@@ -22,7 +22,7 @@ Summary:
 
  * ext2/3 partition is checked and possibly repaired on boot
 
- * Disable automatic apps2ext. Native Froyo App2SD is affected.
+ * Disable automatic apps2ext. Native Froyo App2SD is not affected.
    Note: See also "User control of /sd-ext" below
    Note: apps2ext used to be called app2sd before native Froyo App2SD
          (apps2fat) existed. Confusing!
