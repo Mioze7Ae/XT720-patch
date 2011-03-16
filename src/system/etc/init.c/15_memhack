@@ -1,0 +1,19 @@
+#!/system/xbin/busybox sh
+
+[[ -e /data/dalvik-cache ]] || rm /data/dalvik-cache
+
+if [[ -d /sd-ext/dalvik-cache ]] ; then
+    rm -r /cache/dalvik-cache
+else
+    chown 1000:2001 /cache
+    chmod 0771 /cache 
+    mkdir /cache/dalvik-cache
+    chown 1000:1000 /cache/dalvik-cache
+    chmod 0771 /cache/dalvik-cache
+    [[ -d /data/dalvik-cache ]] && cp -a /data/dalvik-cache/* /cache/dalvik-cache
+    [[ -d /data/dalvik-cache ]] && rm -R /data/dalvik-cache
+    rm /data/dalvik-cache
+    ln -s /cache/dalvik-cache /data/dalvik-cache
+    log -p w dalvik-cache is now on /cache
+fi
+

@@ -101,8 +101,6 @@ loglevel 3
     chown system system /data
     chmod 0771 /data
 
-    exec /system/xbin/busybox run-parts /system/etc/init.c
-
     # Create dump dir and collect dumps.
     # Do this before we mount cache so eventually we can use cache for
     # storing dumps on platforms which do not have a dedicated dump partition.
@@ -130,6 +128,8 @@ loglevel 3
     # This may have been created by the recovery system with odd permissions
     chown system cache /cache/recovery
     chmod 0770 /cache/recovery
+
+    exec /system/xbin/busybox run-parts /system/etc/init.c
 
     #change permissions on vmallocinfo so we can grab it from bugreports
     chown root log /proc/vmallocinfo

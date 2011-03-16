@@ -1,0 +1,9 @@
+#!/system/xbin/busybox sh
+
+# Remove stale symbolic links. It's important to remove invalid links
+# because otherwise you'll get a boot loop. When init.rc continues
+# after all the init.c scripts have run, it will recreate any missing
+# directories in /data/ if we don't create links here.
+for x in app app-private dalvik-cache ; do
+    [[ -e /data/$x ]] || rm /data/$x
+done
