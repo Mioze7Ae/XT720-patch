@@ -21,7 +21,7 @@ if [[ -e /dev/block/mmcblk0p2 ]] ; then
     #insmod /system/lib/modules/ext4.ko
 
     # Do nothing if fsck fails (i.e. not ext2/3, errors)
-    /system/xbin/e2fsck -y /dev/block/mmcblk0p2
+    /system/xbin/e2fsck -p /dev/block/mmcblk0p2
     [[ $? -ge 2 ]] && exit
 
     mount -o noatime,nodiratime /dev/block/mmcblk0p2 /sd-ext
