@@ -4,7 +4,13 @@ A collection of bugfixes and patches for Dexter's 1.3 ROM
 Summary:
 ---------
 
+ * Extended power menu (adds Reboot, Recovery)
+
  * Performance and library tweaks (xavwanted)
+
+ * Add conservative governor (c19932, nadlabak)
+
+ * Improve SD card read performance (reverendkjr)
 
  * memhack (khalpowers) moves dalvik-cache to either /cache or /sd-ext
    Note: Default moves dalvik-cache to /cache
@@ -45,6 +51,46 @@ Summary:
 ChangeLog:
 ----------
 
+2011/03/16 stock221v13-bugfix-3:
+
+ * Add extended power menu.
+
+   Note: Mucho thanks to untermench's 
+         "[REF] How to add Reboot to power menu (updated 10/21/2010)"
+         http://forum.xda-developers.com/showpost.php?p=8674580&postcount=1
+
+   Note: How this deals with the XT720's bootstrapped OpenRecovery
+
+         Unlike the Milestone (which has a vulnerable recovery), the
+         XT720 uses a bootstrapped recovery. To trigger openrecovery
+         boot, Skrilax's modified the "reboot" to create a
+         /cache/.boot_to_or file. This file can't be created by the
+         2000 user that the power menu runs as, so we have to switch
+         to root to create the file. Unfortunately, SuperUser doesn't
+         like running during a shutdown and even if you move the check
+         to earlier (say when the power button appears) SuperUser's
+         accept permissions screen appears behind the power menu and
+         the button is completely obscured so you can't grant
+         permissions. Also, suid shell scripts don't work. It is
+         possible to create a non-suid script that runs su to create
+         the file, but setup for getting the SuperUser permissions to
+         work is not user-friendly enough. So instead I build a
+         super-simple single-purpose binary that can be run suid
+         (/system/xbin/boot_to_or):
+
+            #include <stdio.h>
+            #include <unistd.h>
+
+            int main()
+            {
+               setuid( 0 );
+               (void)fopen("/cache/.boot_to_or", "w");
+               return 0;
+            }
+
+ * Add conservative governor.
+
+ * Set read ahead for sdcard to 2MB
 
 2011/03/16 stock221v13-bugfix-2:
 
